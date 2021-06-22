@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -15,9 +16,15 @@ use App\Http\Controllers\ProductController;
 */
 
 
-Route::get('/products', function () {
-    return ' products';
-});
+// Route::get('/products', [ProductController::class,'index']);
+// Route::post('/products', [ProductController::class,'store']);
+
+Route::resource('products',ProductController::class);
+Route::get('/products/search/{name}',[ProductController::class,'search']);
+Route::get('/products/filterByCategory/{category_id}',[ProductController::class,'filterByCategory']);
+
+Route::resource('categories',CategoryController::class);
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });

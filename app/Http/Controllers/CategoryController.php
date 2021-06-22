@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Models\Category;
 
-class ProductController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return Product::all();
+        return Category::all();
     }
 
     /**
@@ -25,7 +25,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        return Product::create($request->all());
+        return Category::create($request->all());
     }
 
     /**
@@ -36,7 +36,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        return Product::find($id);
+        return Category::find($id);
     }
 
     /**
@@ -48,9 +48,9 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $product = Product::find($id);
-        $product->update($request->all());
-        return $product;
+        $category = Category::find($id);
+        $category->update($request->all());
+        return $category;
     }
 
     /**
@@ -61,28 +61,6 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        return Product::destroy($id);
-    }
-
-    /**
-     * Search for a name.
-     *
-     * @param  str  $title
-     * @return \Illuminate\Http\Response
-     */
-    public function search($title)
-    {
-        return Product::where('title','like','%'.$title.'%')->get();
-    }
-
-    /**
-     * Search for a category.
-     *
-     * @param  str  $title
-     * @return \Illuminate\Http\Response
-     */
-    public function filterByCategory($category_id)
-    {
-        return Product::where('category_id',$category_id)->get();
+        return Category::destroy($id);
     }
 }
