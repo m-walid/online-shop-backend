@@ -23,14 +23,13 @@ Route::post('/login', [AuthController::class, 'login']);
 // Route::get('/products', [ProductController::class,'index']);
 // Route::post('/products', [ProductController::class,'store']);
 
-Route::resource('products',ProductController::class);
-Route::get('/products/search/{name}',[ProductController::class,'search']);
-Route::get('/products/filterByCategory/{category_id}',[ProductController::class,'filterByCategory']);
-
-Route::resource('categories',CategoryController::class);
 
 //protected routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::resource('products', ProductController::class);
+    Route::resource('categories', CategoryController::class);
+    Route::get('/products/search/{name}', [ProductController::class, 'search']);
+    Route::get('/products/filterByCategory/{category_id}', [ProductController::class, 'filterByCategory']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/validate', [AuthController::class, 'verifyUser']);
     Route::get('/orders', [OrderController::class, 'index']);
