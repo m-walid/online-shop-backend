@@ -48,9 +48,10 @@ class OrderController extends Controller
             }
 
             DB::commit();
+            return ['message'=> 'order Placed'];
         } catch (\Throwable $th) {
             DB::rollBack();
-            throw $th;
+            return ['message'=> 'failed'];
         }
     }
 
